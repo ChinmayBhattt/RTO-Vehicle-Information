@@ -1,36 +1,103 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# RTO Vehicle Information & Management App
 
-## Getting Started
+A comprehensive full-stack Next.js application for fetching, managing, and storing RTO (Regional Transport Office) vehicle details. This robust platform features secure user authentication, an OCR-powered number plate scanner, role-based dashboards, and PDF report generation.
 
-First, run the development server:
+## 🚀 Key Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+*   **🔍 Vehicle Search**: Real-time vehicle information fetching and display.
+*   **📸 Number Plate OCR**: Integrated scanner to automatically extract registration numbers from images.
+*   **🔒 Secure Authentication**: NextAuth.js configured with strict session controls and bcrypt encryption.
+*   **👥 Role-Based Access Control**:
+    *   **User Dashboard**: Keep track of search history, save specific vehicles, and manage profiles.
+    *   **Admin Dashboard**: Manage users, view comprehensive analytics, and configure system settings.
+*   **⚙️ Performance & Security**:
+    *   Custom rate-limiting configuration.
+    *   API response caching for accelerated repeated lookups.
+*   **📄 PDF Generation**: Generate dynamic PDF reports for fetched vehicle details.
+*   **🐳 Docker Ready**: Streamlined deployment via Docker and Docker Compose.
+
+## 💻 Tech Stack
+
+*   **Framework**: [Next.js 16](https://nextjs.org/) (App Router)
+*   **Language**: [TypeScript](https://www.typescriptlang.org/)
+*   **Auth**: [NextAuth.js v5](https://next-auth.js.org/)
+*   **Database**: [MongoDB](https://www.mongodb.com/) via [Mongoose](https://mongoosejs.com/)
+*   **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) & Framer Motion
+*   **UI Components**: Custom reusable components, Lucide Icons, React Hot Toast
+*   **Validation**: [Zod](https://zod.dev/)
+
+## 📁 Project Structure
+
+```text
+├── public/                 # Static assets
+├── src/
+│   ├── app/                # Next.js App Router endpoints, pages, layouts
+│   │   ├── (auth)/         # Login & Signup flows
+│   │   ├── admin/          # Admin dashboard & analytics
+│   │   ├── dashboard/      # User dashboard (history, saved items)
+│   │   ├── api/            # Serverless API routes (auth, vehicle, admin)
+│   │   └── vehicle/        # Dynamic vehicle details pages
+│   ├── components/         # Reusable React components (UI, Admin, Dashboard, OCR)
+│   └── lib/                # Core logic (DB context, NextAuth models, rate config, services)
+├── docker-compose.yml      # Multi-container local orchestration
+└── Dockerfile              # Container building instructions
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Getting Started
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Prerequisites
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Node.js (v18+)
+- MongoDB connection string (Local or MongoDB Atlas)
+- Docker & Docker Compose (optional for containerized setup)
 
-## Learn More
+### Environment Variables
 
-To learn more about Next.js, take a look at the following resources:
+Create a `.env.local` file in the root directory and configure the following variables:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```env
+# NextAuth
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=your_generated_secret_string
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# MongoDB
+MONGODB_URI=mongodb://localhost:27017/rto-app
 
-## Deploy on Vercel
+# External APIs
+# RTO_API_KEY=your_api_key_here
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Local Development
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+2. **Run the development server**:
+   ```bash
+   npm run dev
+   ```
+3. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+### Docker Setup
+
+To spin up the entire application stack using Docker:
+
+```bash
+docker-compose up -d --build
+```
+The application will be accessible at `http://localhost:3000`.
+
+## 📜 Scripts
+
+*   `npm run dev` - Starts the Next.js development server.
+*   `npm run build` - Builds the application for production deployment.
+*   `npm run start` - Starts the Next.js production server.
+*   `npm run lint` - Lints the codebase using ESLint.
+
+## 🛡️ License & Legal
+
+Please refer to the terms of serving and privacy policies accessible in the app's footer. All usage of RTO data should comply with standard local traffic authority regulations.
+
+---
+*Bootstrapped with Next.js*
