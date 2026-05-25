@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGODB_URI=mongodb://db:27017/rto-finder
+      - NEXTAUTH_SECRET=dev-secret-change-in-production-12345678
+      - NEXTAUTH_URL=http://localhost:3000
+      - VEHICLE_API_PROVIDER=mock
+    depends_on:
+      - db
+
+  db:
+    image: mongodb/mongodb-community-server:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
