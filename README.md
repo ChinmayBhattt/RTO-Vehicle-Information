@@ -1,4 +1,4 @@
-# RTO Vehicle Information & Management App  
+# RTO Vehicle Information & Management App   
 
 A comprehensive full-stack Next.js application for fetching, managing, and storing RTO (Regional Transport Office) vehicle details. This robust platform features secure user authentication, an OCR-powered number plate scanner, role-based dashboards, and PDF report generation.
 
